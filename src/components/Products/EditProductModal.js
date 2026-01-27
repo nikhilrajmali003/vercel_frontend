@@ -48,27 +48,7 @@ const EditProductModal = ({ product, onClose, onSuccess }) => {
     }
   };
 
-  const removeImage = (index) => {
-    // Calculate which new file to remove if it's a new one
-    const imageBeingRemoved = formData.images[index];
-    if (imageBeingRemoved.startsWith('blob:')) {
-      // It's a new file, find its index in imageFiles
-      // This is tricky if there are multiple blobs. 
-      // Simpler: find the blob URL in the previews and find index.
-      const blobUrls = imageFiles.map(file => URL.createObjectURL(file)); // This is problematic because createObjectURL creates DIFFERENT URLs
-      // Better: keep a mapping or just filter both
-    }
 
-    // Improved logic: find the url in previews we generated
-    setFormData(prev => {
-      const newImages = [...prev.images];
-      newImages.splice(index, 1);
-      return { ...prev, images: newImages };
-    });
-
-    // We also need to remove from imageFiles if it was a NEW file
-    // To do this correctly, we should store {file, previewUrl} in imageFiles
-  };
 
   // RE-WRITING handling to be robust
   const handleImageChange = (e) => {

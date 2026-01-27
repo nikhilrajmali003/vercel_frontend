@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Ensure API URL ends with /api
+let apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+if (!apiUrl.endsWith('/api')) {
+  apiUrl += '/api';
+}
+const API_BASE_URL = apiUrl;
 // Log the API URL to help debugging (viewable in browser console)
 console.log('Using API Base URL:', API_BASE_URL);
 

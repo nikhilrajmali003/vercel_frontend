@@ -1,0 +1,227 @@
+.product-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.product-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  /* Square aspect ratio generally looks good for products */
+  position: relative;
+  background: #f8fafc;
+  overflow: hidden;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  /* Helps if images have white backgrounds */
+}
+
+.product-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+}
+
+.image-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 6px;
+  border-radius: 10px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dot.active {
+  background: #475569;
+}
+
+.product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-name {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+  min-height: 40px;
+  /* To align cards roughly if titles vary in length */
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: auto;
+  /* Push actions to bottom */
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.detail-label {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.detail-value {
+  color: #1e293b;
+  font-weight: 600;
+  text-align: right;
+}
+
+.product-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-status {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Blue for Publish action (when currently unpublished or generic publish) */
+.btn-publish {
+  background-color: #2400FF;
+  color: white;
+}
+
+.btn-publish:hover {
+  background-color: #1a00cc;
+}
+
+/* Green for Unpublish action (when currently published, based on image)
+   Wait, the image shows:
+   Unpublish button -> Green.
+   Publish button -> Blue.
+*/
+.btn-unpublish {
+  background-color: #4ade80;
+  /* bg-green-400 equivalent */
+  color: white;
+}
+
+.btn-unpublish:hover {
+  background-color: #22c55e;
+}
+
+
+.btn-edit {
+  flex: 1;
+  padding: 7px 0;
+  /* 1px less for border */
+  background: white;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-edit:hover {
+  background: #f8fafc;
+  border-color: #cbd5e0;
+}
+
+.btn-delete {
+  padding: 7px;
+  background: white;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.btn-delete:hover {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #ef4444;
+}
+
+/* Response adjustments */
+@media (max-width: 480px) {
+  .product-actions {
+    flex-wrap: wrap;
+  }
+
+  .btn-status,
+  .btn-edit {
+    min-width: 80px;
+  }
+}

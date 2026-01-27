@@ -1,0 +1,279 @@
+.otp-page {
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.otp-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  padding: 0;
+  align-items: stretch;
+}
+
+.otp-left {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  background: white;
+  padding: 40px;
+  /* Set margin top bottom left right */
+}
+
+.otp-visual {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.visual-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left;
+}
+
+.otp-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 40px;
+}
+
+.otp-right-content {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.otp-title {
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.otp-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.otp-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.otp-label {
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.otp-input {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  background: white;
+  color: #1a1a2e;
+  transition: all 0.2s;
+}
+
+.otp-input:focus {
+  outline: none;
+  border-color: #071074;
+  box-shadow: 0 0 0 3px rgba(7, 16, 116, 0.1);
+}
+
+.otp-input-error {
+  border-color: #e53e3e;
+}
+
+.otp-error-message {
+  color: #e53e3e;
+  font-size: 13px;
+  margin-top: 8px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.otp-button {
+  width: 100%;
+  padding: 14px;
+  background: #071074;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.otp-button:hover:not(:disabled) {
+  background: #050b5e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.otp-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.otp-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.otp-resend {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.otp-resend-text {
+  color: #4a5568;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.otp-resend-link {
+  background: none;
+  border: none;
+  color: #1a1a2e;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.otp-resend-link:hover {
+  color: #3182ce;
+}
+
+.otp-resend-timer {
+  color: #3182ce;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .otp-container {
+    flex-direction: column;
+  }
+
+  .otp-left {
+    width: 100%;
+    flex: 0;
+    min-height: 50vh;
+    padding: 40px 30px;
+  }
+
+  .otp-right {
+    width: 100%;
+    flex: 1;
+    padding: 60px 30px;
+  }
+
+  .otp-right-content {
+    max-width: 500px;
+  }
+
+  .visual-image {
+    max-height: 40vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .otp-left {
+    display: none;
+  }
+
+  .otp-right {
+    padding: 40px 24px;
+    width: 100%;
+  }
+
+  .otp-right-content {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .otp-title {
+    font-size: 24px;
+    margin-bottom: 32px;
+  }
+
+  .otp-input {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .otp-inputs {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .otp-right {
+    padding: 32px 20px;
+  }
+
+  .otp-right-content {
+    padding: 0;
+  }
+
+  .otp-title {
+    font-size: 22px;
+    margin-bottom: 24px;
+  }
+
+  .otp-input {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+
+  .otp-inputs {
+    gap: 8px;
+  }
+
+  .otp-button {
+    padding: 14px;
+  }
+}

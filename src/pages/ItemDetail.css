@@ -1,0 +1,158 @@
+.item-detail {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.item-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #2980b9;
+}
+
+.item-detail-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.item-detail-content {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-detail-image {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.item-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-detail-info {
+  padding: 2rem;
+}
+
+.item-detail-title {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.item-detail-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.item-detail-category {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.item-detail-price {
+  color: #27ae60;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.item-detail-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-inactive {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-draft {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.item-detail-description,
+.item-detail-tags {
+  margin-bottom: 2rem;
+}
+
+.item-detail-description h3,
+.item-detail-tags h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.item-detail-description p {
+  color: #7f8c8d;
+  line-height: 1.6;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+}
+
+.item-detail-creator {
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  color: #7f8c8d;
+}
+
+@media (max-width: 768px) {
+  .item-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .item-detail-image {
+    height: 250px;
+  }
+
+  .item-detail-info {
+    padding: 1.5rem;
+  }
+
+  .item-detail-title {
+    font-size: 1.5rem;
+  }
+}

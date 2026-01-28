@@ -8,6 +8,16 @@ import Loading from '../components/UI/Loading';
 import Error from '../components/UI/Error';
 import './Form.css';
 
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { itemService } from '../services/itemService';
+import Input from '../components/UI/Input';
+import Textarea from '../components/UI/Textarea';
+import Button from '../components/UI/Button';
+import Loading from '../components/UI/Loading';
+import Error from '../components/UI/Error';
+import './Form.css';
+
 const EditItem = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,13 +25,16 @@ const EditItem = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
-    title: '',
+    productName: '',
     description: '',
-    image: '',
-    category: '',
-    price: '',
-    status: 'active',
-    tags: ''
+    imageInput: '',
+    productType: '',
+    sellingPrice: '',
+    mrp: '',
+    quantityStock: '',
+    brandName: '',
+    exchangeEligibility: 'No',
+    status: 'unpublished'
   });
 
   useEffect(() => {
@@ -32,16 +45,21 @@ const EditItem = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await itemService.getItemById(id);
-      const item = response.data;
+      const result = await itemService.getItemById(id);
+      const item = result.data; // Ensure we access data property correctly as per controller
+
       setFormData({
-        title: item.title || '',
+        productName: item.productName || '',
         description: item.description || '',
-        image: item.image || '',
-        category: item.category || '',
-        price: item.price || '',
-        status: item.status || 'active',
-        tags: item.tags ? item.tags.join(', ') : ''
+        // Map images array to single URL for now, taking the first one if available
+        imageInput: (item.images && item.images.length > 0) ? item.images[0] : '',
+        productType: item.productType || '',
+        sellingPrice: item.sellingPrice || '',
+        mrp: item.mrp || '',
+        quantityStock: item.quantityStock || '',
+        brandName: item.brandName || '',
+        exchangeEligibility: item.exchangeEligibility || 'No',
+        status: item.status || 'unpublished'
       });
     } catch (err) {
       setError(err.message || 'Failed to fetch item');
@@ -66,12 +84,15 @@ const EditItem = () => {
     try {
       const itemData = {
         ...formData,
-        price: formData.price ? parseFloat(formData.price) : undefined,
-        tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag) : []
+        quantityStock: parseInt(formData.quantityStock),
+        mrp: parseFloat(formData.mrp),
+        sellingPrice: parseFloat(formData.sellingPrice),
+        // Handle images: if URL input exists, use it. Backend expects array.
+        images: formData.imageInput ? [formData.imageInput] : []
       };
 
       await itemService.updateItem(id, itemData);
-      navigate(`/items/${id}`);
+      navigate(`/products`);
     } catch (err) {
       setError(err.message || 'Failed to update item');
     } finally {
@@ -79,21 +100,102 @@ const EditItem = () => {
     }
   };
 
-  if (loading) return <Loading message="Loading item..." />;
+  if (loading) return <Loading message="Loading product..." />;
 
   return (
     <div className="form-page">
-      <h1>Edit Item</h1>
+      <h1>Edit Product</h1>
       <form onSubmit={handleSubmit} className="form">
         {error && <Error message={error} />}
 
         <Input
-          label="Title"
-          name="title"
-          value={formData.title}
+          label="Product Name"
+          name="productName"
+          value={formData.productName}
           onChange={handleChange}
           required
         />
+
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="productType" className="input-label">
+              Product Type
+            </label>
+            <select
+              id="productType"
+              name="productType"
+              value={formData.productType}
+              onChange={handleChange}
+              className="input-field"
+              required
+            >
+              <option value="">Select Type</option>
+              <option value="Foods">Foods</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Beauty Products">Beauty Products</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+
+          <Input
+            label="Brand Name"
+            name="brandName"
+            value={formData.brandName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-row">
+          <Input
+            label="MRP"
+            name="mrp"
+            type="number"
+            value={formData.mrp}
+            onChange={handleChange}
+            placeholder="0.00"
+            required
+            min="0"
+          />
+          <Input
+            label="Selling Price"
+            name="sellingPrice"
+            type="number"
+            value={formData.sellingPrice}
+            onChange={handleChange}
+            placeholder="0.00"
+            required
+            min="0"
+          />
+        </div>
+
+        <div className="form-row">
+          <Input
+            label="Quantity Stock"
+            name="quantityStock"
+            type="number"
+            value={formData.quantityStock}
+            onChange={handleChange}
+            required
+            min="0"
+          />
+          <div className="form-group">
+            <label htmlFor="exchangeEligibility" className="input-label">
+              Exchange Eligibility
+            </label>
+            <select
+              id="exchangeEligibility"
+              name="exchangeEligibility"
+              value={formData.exchangeEligibility}
+              onChange={handleChange}
+              className="input-field"
+            >
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
 
         <Textarea
           label="Description"
@@ -105,41 +207,12 @@ const EditItem = () => {
 
         <Input
           label="Image URL"
-          name="image"
+          name="imageInput"
           type="url"
-          value={formData.image}
+          value={formData.imageInput}
           onChange={handleChange}
+          placeholder="https://example.com/image.jpg"
         />
-
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="category" className="input-label">
-              Category
-            </label>
-            <select
-              id="category"
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="input-field"
-            >
-              <option value="">Select Category</option>
-              <option value="electronics">Electronics</option>
-              <option value="clothing">Clothing</option>
-              <option value="books">Books</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <Input
-            label="Price"
-            name="price"
-            type="number"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="0.00"
-          />
-        </div>
 
         <div className="form-group">
           <label htmlFor="status" className="input-label">
@@ -152,25 +225,16 @@ const EditItem = () => {
             onChange={handleChange}
             className="input-field"
           >
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="draft">Draft</option>
+            <option value="unpublished">Unpublished</option>
+            <option value="published">Published</option>
           </select>
         </div>
-
-        <Input
-          label="Tags (comma-separated)"
-          name="tags"
-          value={formData.tags}
-          onChange={handleChange}
-          placeholder="tag1, tag2, tag3"
-        />
 
         <div className="form-actions">
           <Button
             type="button"
             variant="secondary"
-            onClick={() => navigate(`/items/${id}`)}
+            onClick={() => navigate('/products')}
             disabled={saving}
           >
             Cancel

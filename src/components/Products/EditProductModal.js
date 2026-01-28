@@ -31,6 +31,8 @@ const EditProductModal = ({ product, onClose, onSuccess }) => {
         exchangeEligibility: product.exchangeEligibility || 'Yes',
         description: product.description || ''
       });
+      // Reset any previously added image files when editing a different product
+      setImageFiles([]);
     }
   }, [product]);
 

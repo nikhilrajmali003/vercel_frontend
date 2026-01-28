@@ -7,15 +7,6 @@ import Button from '../components/UI/Button';
 import Error from '../components/UI/Error';
 import './Form.css';
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { itemService } from '../services/itemService';
-import Input from '../components/UI/Input';
-import Textarea from '../components/UI/Textarea';
-import Button from '../components/UI/Button';
-import Error from '../components/UI/Error';
-import './Form.css';
-
 const CreateItem = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

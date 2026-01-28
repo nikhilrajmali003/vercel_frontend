@@ -8,16 +8,6 @@ import Loading from '../components/UI/Loading';
 import Error from '../components/UI/Error';
 import './Form.css';
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { itemService } from '../services/itemService';
-import Input from '../components/UI/Input';
-import Textarea from '../components/UI/Textarea';
-import Button from '../components/UI/Button';
-import Loading from '../components/UI/Loading';
-import Error from '../components/UI/Error';
-import './Form.css';
-
 const EditItem = () => {
   const { id } = useParams();
   const navigate = useNavigate();

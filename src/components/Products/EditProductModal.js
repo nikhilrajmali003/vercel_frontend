@@ -60,11 +60,15 @@ const EditProductModal = ({ product, onClose, onSuccess }) => {
       preview: URL.createObjectURL(file)
     }));
 
+    // Filter out duplicates if needed, but for now just add them
     setImageFiles(prev => [...prev, ...newFileEntries]);
     setFormData(prev => ({
       ...prev,
       images: [...prev.images, ...newFileEntries.map(e => e.preview)]
     }));
+
+    // Reset file input so same file can be selected again if removed
+    e.target.value = '';
   };
 
   // Update removeImage to use file entries
